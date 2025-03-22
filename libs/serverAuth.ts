@@ -5,7 +5,10 @@ import prisma from '@/libs/prismadb';
 const serverAuth = async (req: NextApiRequest) => {
     const session = await getSession({ req });
 
-    if (!session?.user?.email) throw new Error('Not signed in');
+    if (!session?.user?.email) {
+        console.log('Not signed in.');
+        return null;
+    }
 
     const currentUser = await prisma.user.findUnique({
         where: {
@@ -13,7 +16,10 @@ const serverAuth = async (req: NextApiRequest) => {
         },
     });
 
-    if (!currentUser) throw new Error('Not signed in');
+    if (!currentUser) {
+        console.log('Not signed in!');
+        return null;
+    }
 
     return { currentUser };
 };
