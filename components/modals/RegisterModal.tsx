@@ -3,35 +3,38 @@ import useRegisterModal from '@/hooks/useRegisterModal';
 import React, { useCallback, useState } from 'react';
 import Input from '../Input';
 import Modal from '../Modal';
+import { RiOilFill } from 'react-icons/ri';
 
-const LoginModal = () => {
+const RegisterModal = () => {
     const loginModal = useLoginModal();
     const registerModal = useRegisterModal();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     const onToggle = useCallback(() => {
         if (isLoading) return;
 
-        loginModal.onClose();
-        registerModal.onOpen();
+        registerModal.onClose();
+        loginModal.onOpen();
     }, [isLoading, loginModal, registerModal]);
 
     const onSubmit = useCallback(async () => {
         try {
             setIsLoading(true);
 
-            //TODO: ADD login
-            //await signin()
+            //TODO: ADD register and login
 
-            loginModal.onClose();
+            registerModal.onClose();
         } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
         }
-    }, [loginModal]);
+    }, [registerModal]);
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
@@ -39,6 +42,18 @@ const LoginModal = () => {
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
+                disabled={isLoading}
+            />
+            <Input
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                disabled={isLoading}
+            />
+            <Input
+                placeholder="Username"
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
                 disabled={isLoading}
             />
             <Input
@@ -53,12 +68,12 @@ const LoginModal = () => {
     const footerContent = (
         <div className="text-neutral-400 text-center mt-4">
             <p>
-                First time using twitter?{'  '}
+                Already have an account?{'  '}
                 <span
                     onClick={onToggle}
                     className="text-white cursor-pointer hover:underline"
                 >
-                    Create an account
+                    Sign in
                 </span>
             </p>
         </div>
@@ -67,10 +82,10 @@ const LoginModal = () => {
     return (
         <Modal
             disabled={isLoading}
-            isOpen={loginModal.isOpen}
-            onClose={loginModal.onClose}
-            title="Login"
-            actionLabel="Sign in"
+            isOpen={registerModal.isOpen}
+            onClose={registerModal.onClose}
+            title="Create an account"
+            actionLabel="Register"
             onSubmit={onSubmit}
             body={bodyContent}
             footer={footerContent}
@@ -78,4 +93,4 @@ const LoginModal = () => {
     );
 };
 
-export default LoginModal;
+export default RegisterModal;
