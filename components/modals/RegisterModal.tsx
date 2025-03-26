@@ -37,11 +37,10 @@ const RegisterModal = () => {
             });
 
             toast.success('Account succesfully created.');
-
-            signIn('credentials', {
+            //callbackUrl: '/',
+            await signIn('credentials', {
                 email,
                 password,
-                callbackUrl: '/',
             });
 
             registerModal.onClose();

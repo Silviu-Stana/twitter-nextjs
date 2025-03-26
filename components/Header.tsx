@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
-import { BsBack } from 'react-icons/bs';
+import { BiArrowBack } from 'react-icons/bi';
 
 interface HeaderProps {
     label: string;
@@ -18,11 +18,11 @@ const Header: React.FC<HeaderProps> = ({ label, showBackArrow }) => {
         <div className="border-b-[1px] border-neutral-700 p-5">
             <div className="flex flex-row items-center gap-2">
                 {showBackArrow && (
-                    <BsBack
+                    <BiArrowBack
                         onClick={handleBack}
                         size={20}
-                        className="
-                 cursor-pointer hover:opacity-70 transition"
+                        className="cursor-pointer hover:opacity-70 transition"
+                        color="white"
                     />
                 )}
                 <h1 className="text-white text-xl font-semibold">{label}</h1>

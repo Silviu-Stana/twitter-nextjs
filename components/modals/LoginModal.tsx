@@ -23,10 +23,9 @@ const LoginModal = () => {
         try {
             setIsLoading(true);
 
-            signIn('credentials', {
+            await signIn('credentials', {
                 email,
                 password,
-                callbackUrl: '/',
             });
 
             loginModal.onClose();
