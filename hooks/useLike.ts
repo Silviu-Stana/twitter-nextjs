@@ -4,6 +4,7 @@ import useLoginModal from './useLoginModal';
 import usePost from './usePost';
 import usePosts from './usePosts';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const useLike = ({ postId, userId }: { postId: string; userId?: string }) => {
     const { data: currentUser } = useCurrentUser();
@@ -32,8 +33,24 @@ const useLike = ({ postId, userId }: { postId: string; userId?: string }) => {
 
             mutateFetchedPost();
             mutateFetchedPosts();
+
+            toast.success('Success');
         } catch (error) {
             console.log(error);
         }
-    }, []);
+    }, [
+        currentUser,
+        hasLiked,
+        loginModal,
+        mutateFetchedPost,
+        mutateFetchedPosts,
+        postId,
+    ]);
+
+    return {
+        hasLiked,
+        toggleLike,
+    };
 };
+
+export default useLike;
