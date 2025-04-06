@@ -33,8 +33,6 @@ const useLike = ({ postId, userId }: { postId: string; userId?: string }) => {
 
             mutateFetchedPost();
             mutateFetchedPosts();
-
-            toast.success('Success');
         } catch (error) {
             console.log(error);
         }
